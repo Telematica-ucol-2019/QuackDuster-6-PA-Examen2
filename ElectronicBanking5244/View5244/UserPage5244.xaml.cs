@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace ElectronicBanking5244.View5244
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class Account : ContentPage
+    public partial class UserPage5244 : ContentPage
     {
-        public Account()
+        public UserPage5244()
         {
             InitializeComponent();
         }
