@@ -11,14 +11,12 @@ using Xamarin.Forms.Xaml;
 namespace ElectronicBanking5244.View5244
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class UserPage5244 : ContentPage
+    public partial class RegisterPage5244 : ContentPage
     {
-        public UserPage5244(Models5244.User5244 user, UserAccountsViewModel5244 vm)
+        public RegisterPage5244()
         {
             InitializeComponent();
-            vm.User = new Models5244.User5244();
-            vm.User = user;
-            this.BindingContext = vm;
+            BindingContext = new UserAccountsViewModel5244();
         }
     }
 }

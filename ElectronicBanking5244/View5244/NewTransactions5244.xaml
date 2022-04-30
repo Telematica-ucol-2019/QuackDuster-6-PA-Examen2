@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:ElectronicBanking5244.Models5244"
+             xmlns:vm="clr-namespace:ElectronicBanking5244.ViewModel5244"
+             x:Class="ElectronicBanking5244.View5244.NewTransactions5244"
+             Title="Making a new transaction"
+             x:Name="thisNewTransactions">
+
+    <ContentPage.BindingContext>
+        <vm:UserAccountsViewModel5244/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <StackLayout BindingContext="{Binding BindingContext.Transaction, Source={x:Reference thisNewTransactions}}"
+                     x:DataType="model:Transactions5244">
+            <Label x:Name="Name">Name Account</Label>
+            <Entry Text="{Binding Amount}" x:Name="InpAmount" Keyboard="Numeric"/>
+
+
+            <Button x:Name="DepositBtn" Text="Deposit" HorizontalOptions="Center" 
+                    BackgroundColor="Red"
+                    TextColor="White"
+                    Command="{Binding BindingContext.cmdAddDeposit, Source={x:Reference thisNewTransactions}}"
+                    CommandParameter="{Binding BindingContext.Transaction, Source={x:Reference thisNewTransactions}}"/>
+
+            <Button x:Name="WithdrawalBtn" Text="Withdrawal" HorizontalOptions="Center"
+                    BackgroundColor="Red"
+                    TextColor="White"
+                    Command="{Binding BindingContext.cmdAddWithdrawal, Source={x:Reference thisNewTransactions}}"
+                    CommandParameter="{Binding .}"/>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

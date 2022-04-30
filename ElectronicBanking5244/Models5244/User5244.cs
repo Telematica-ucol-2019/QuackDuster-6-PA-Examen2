@@ -13,23 +13,10 @@ namespace ElectronicBanking5244.Models5244
 
         public string MothersLastName { get; set; }
 
-        public ObservableCollection<Phone> Telephone { get; set; }
+        public string Telephone { get; set; }
 
-        public ObservableCollection<Accounts> Accounts { get; set; }
-    }
+        public ObservableCollection<UserAccounts5244> Accounts { get; set; }
 
-    public class Phone
-    {
-        public string Id { get; set; }
-
-        public string Number { get; set; }
-    }
-
-    public class Accounts
-    {
-        public string Id { get; set; }
-
-        public string Name { get; set; }
     }
 
 }

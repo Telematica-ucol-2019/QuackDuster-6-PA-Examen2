@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:ElectronicBanking5244.Models5244"
+             xmlns:vm="clr-namespace:ElectronicBanking5244.ViewModel5244"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             x:Class="ElectronicBanking5244.View5244.AccountNew5244"
+             x:Name="thisNewAccount"
+             x:DataType="vm:UserAccountsViewModel5244"
+             >
+
+    <ContentPage.BindingContext>
+        <vm:UserAccountsViewModel5244/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <StackLayout BindingContext="{Binding BindingContext.Account, Source={x:Reference thisNewAccount}}"
+                     x:DataType="model:UserAccounts5244"
+                     Margin="10">
+            <Label FontSize="Medium">Account Name</Label>
+            <Entry Text="{Binding Name, Mode=TwoWay}"/>
+            <Label FontSize="Medium">Balance</Label>
+            <Entry Text="{Binding Balance, Mode=TwoWay}" Keyboard="Numeric" 
+                   x:Name="inpBalance"
+                   >
+                <Entry.Behaviors >
+                    <xct:EventToCommandBehavior
+                        x:DataType="vm:UserAccountsViewModel5244"
+                        EventName="TextChanged"
+                        Command="{Binding cmdInpBalanceValidate}"/>
+                </Entry.Behaviors>
+            </Entry>
+
+            <Button Command="{Binding BindingContext.cmdCreateNewAccount, Source={x:Reference thisNewAccount}}"
+                    Text="Add Account ➕" 
+                    HorizontalOptions="Center"
+                    BackgroundColor="Red"
+                    TextColor="White"
+                    CommandParameter="{Binding BindingContext.Account, Source={x:Reference thisNewAccount}}"></Button>
+                    
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
+    
+    

@@ -1,12 +1,112 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ElectronicBanking5244.View5244.AccountDetail">
+             x:Class="ElectronicBanking5244.View5244.AccountDetail"
+             xmlns:model="clr-namespace:ElectronicBanking5244.Models5244" 
+             xmlns:vm="clr-namespace:ElectronicBanking5244.ViewModel5244"
+             Title="Account Details"
+             x:Name="thisAccountDetail"
+             >
+
+    <ContentPage.BindingContext>
+        <vm:UserAccountsViewModel5244/>
+    </ContentPage.BindingContext>
+
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <Grid RowDefinitions="*,auto">
+            <ScrollView Grid.Row="0" BindingContext="{Binding BindingContext.Account, Source={x:Reference thisAccountDetail}}">
+                
+                <StackLayout>
+                    <StackLayout>
+                        <Frame>
+                            <StackLayout>
+                                <Label>
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="Account name: " Grid.Row="0" FontSize="Medium"></Span>
+                                            <Span Text="{Binding Name} " Grid.Row="0" FontSize="Medium"></Span>
+                                            <Span Text="&#10;Card Number: " Grid.Row="1" FontSize="Small"></Span>
+                                            <Span Text="{Binding Number}" Grid.Row="1" FontSize="Small"></Span>
+                                            <Span Text="&#10;Balance: $" Grid.Row="2" FontSize="Subtitle"></Span>
+                                            <Span Text="{Binding Balance}" Grid.Row="2" FontSize="Subtitle"></Span>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                            </StackLayout>    
+                        </Frame>
+                        <StackLayout HorizontalOptions="FillAndExpand" >
+                            <Frame>
+                                <Label Text="Transactions History" FontSize="Large" TextColor="Red"></Label>
+                            </Frame>
+                        </StackLayout>
+                    </StackLayout>
+                    <CollectionView ItemsSource="{Binding Transactions}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="model:Transactions5244">
+
+                                    <StackLayout>
+                                        <Frame>
+                                        <Grid BackgroundColor="WhiteSmoke" HorizontalOptions="Fill" VerticalOptions="FillAndExpand">
+
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="auto"/>
+                                                <RowDefinition Height="auto"/>
+                                                <RowDefinition Height="auto"/>
+                                                <RowDefinition Height="auto"/>
+                                                <RowDefinition Height="auto"/>
+                                                <RowDefinition Height="auto"/>
+                                                <RowDefinition Height="auto"/>
+                                            </Grid.RowDefinitions>
+
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <BoxView Grid.Row="0" BackgroundColor="Black" HeightRequest="1" Grid.ColumnSpan="4"/>
+                                            <Label Grid.Row="1" Grid.Column="0" Text="Transaction Type" FontSize="Subtitle"/>
+                                            <Label Grid.Row="1" Grid.Column="1" Text="{Binding Type}" FontSize="Medium"/>
+                                            <Label Grid.Row="2" Grid.Column="0" Text="Transaction ID:" FontSize="Medium"/>
+                                            <Label Grid.Row="2" Grid.Column="1" Text="{Binding Id}" FontSize="Medium"/>
+                                            <Label Grid.Row="3" Grid.Column="0" Text="Transaction Amount:" FontSize="Subtitle"/>
+                                            <Label Grid.Row="3" Grid.Column="1" Text="{Binding Amount}" FontSize="Medium"/>
+                                            <Label Grid.Row="4" Grid.Column="0" Text="Transaction Date" FontSize="Medium"/>
+                                            <Label Grid.Row="4" Grid.Column="1" Text="{Binding Date}" FontSize="Medium"/>
+                                            <Label Grid.Row="5" Grid.Column="0" Text="Transaction Hour:" FontSize="Medium"/>
+                                            <Label Grid.Row="5" Grid.Column="1" Text="{Binding Hour}" FontSize="Medium"/>
+                                            <BoxView Grid.Row="6" BackgroundColor="Black" HeightRequest="1" Grid.ColumnSpan="4"/>
+                                        </Grid>
+                                    </Frame>
+                                    </StackLayout>
+
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+
+                </StackLayout>
+                
+                
+            </ScrollView>
+            <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                <Button Grid.Row="1" Command="{Binding BindingContext.cmdMakeDeposit, Source={x:Reference thisAccountDetail}}"
+                        Text="Deposit ➕" 
+                        BackgroundColor="RosyBrown"
+                        HorizontalOptions="Center"
+                        ></Button>
+
+                <Button Grid.Row="2" Command="{Binding BindingContext.cmdMakeWithDrawal, Source={x:Reference thisAccountDetail}}"
+                        Text="Withdrawal ➖" 
+                        BackgroundColor="RosyBrown"
+                        HorizontalOptions="Center"
+                        ></Button>
+
+                <Button Grid.Row="3" Command="{Binding BindingContext.cmdBtnDeleteAccount, Source={x:Reference thisAccountDetail}}"
+                        Text="Delete Acc ❌" 
+                        BackgroundColor="RosyBrown"
+                        HorizontalOptions="Center"
+                        CommandParameter="{Binding Account}"
+                        ></Button>
+            </StackLayout>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

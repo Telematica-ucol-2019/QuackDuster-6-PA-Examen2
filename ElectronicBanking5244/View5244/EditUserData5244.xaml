@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:ElectronicBanking5244.ViewModel5244"
+             xmlns:model="clr-namespace:ElectronicBanking5244.Models5244"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             x:DataType="vm:UserAccountsViewModel5244"
+             x:Class="ElectronicBanking5244.View5244.EditUserData5244"
+             Title="Edit user information"
+             x:Name="thisEditUser"
+             >
+    
+    <ContentPage.BindingContext>
+        <vm:UserAccountsViewModel5244/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+            <Grid Background="White" HorizontalOptions="Center" VerticalOptions="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <StackLayout Grid.Row="0" VerticalOptions="Center" Orientation="Horizontal" HorizontalOptions="Center" Margin="1">
+                    <Label Text="Update your information!" FontSize="Title"></Label>
+                </StackLayout>
+
+                <ScrollView Grid.Row="1" BackgroundColor="WhiteSmoke" Margin="1" VerticalOptions="Center">
+                    <StackLayout Grid.Row="1" VerticalOptions="Center" BackgroundColor="AliceBlue">
+
+                        <Frame>
+                            <StackLayout>
+                                <Image Source="https://icones.pro/wp-content/uploads/2021/02/icone-utilisateur-rouge.png"></Image>
+                                <Label Text="Name(s)" TextColor="Black" FontSize="Medium"/>
+                                <Entry 
+                                    x:Name="inpName"
+                                    Text="{Binding inpName, Mode=TwoWay}"
+                                    Placeholder="Name">
+                                    
+                                </Entry>
+                                <Label Text="Last Name" TextColor="Black" FontSize="Medium"/>
+                                <Entry 
+                                    x:Name="inpLastName"
+                                    Text="{Binding inpLastName, Mode=TwoWay}"
+                                    Placeholder="Last Name">
+                                    
+                                </Entry>
+                                <Label Text="Mother's Last Name" TextColor="Black" FontSize="Medium"/>
+                                <Entry 
+                                    x:Name="inpMothersLastName"
+                                    Text="{Binding inpMothersLastName, Mode=TwoWay}"
+                                    Placeholder="Mother's Last Name">
+                                    
+                                </Entry>
+                                <Label Text="Telephone" TextColor="Black" FontSize="Medium"/>
+                                <Entry 
+                                    x:Name="inpTelephone"
+                                    Text="{Binding inpTelephone, Mode=TwoWay}" Keyboard="Telephone"
+                                    Placeholder="Telephone">
+                                    
+                                </Entry>
+
+                                <StackLayout>
+
+                                </StackLayout>
+                                <Button 
+                                    Text="Update info" 
+                                    BackgroundColor="Red" 
+                                    TextColor="White" 
+                                    BorderColor="Black" 
+                                    CornerRadius="8" 
+                                    Command="{Binding cmdBtnRegisterUser}"
+                                    CommandParameter="{Binding User}"/>
+                            </StackLayout>
+                        </Frame>
+
+                    </StackLayout>
+                </ScrollView>
+
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

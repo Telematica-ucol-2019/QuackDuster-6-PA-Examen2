@@ -2,6 +2,7 @@
 using ElectronicBanking5244.View5244;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using ElectronicBanking5244.ViewModel5244;
 
 namespace ElectronicBanking5244
 {
@@ -11,7 +12,7 @@ namespace ElectronicBanking5244
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage( new UserPage5244() );
+            MainPage = new NavigationPage(new RegisterPage5244());
         }
 
         protected override void OnStart()

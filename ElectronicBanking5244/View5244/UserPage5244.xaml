@@ -3,18 +3,116 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:model="clr-namespace:ElectronicBanking5244.Models5244"
              xmlns:vm="clr-namespace:ElectronicBanking5244.ViewModel5244"
-             Title="Accounts"
+             Title="Electronic Banking"
              x:Class="ElectronicBanking5244.View5244.UserPage5244"
-             >
+             x:Name="thisUser">
+
     <ContentPage.BindingContext>
         <vm:UserAccountsViewModel5244/>
     </ContentPage.BindingContext>
 
+
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <Grid Background="White">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="250"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackLayout Grid.Row="0" VerticalOptions="CenterAndExpand" Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Margin="1" Padding="1">
+                <Label HorizontalOptions="Center">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="  National Bank App &#10;" FontSize="Large"/>
+                            <Span Text=" Welcome, " FontSize="Large"/>
+                            <Span Text="{Binding inpName}" FontSize="Medium" FontAttributes="Bold"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </StackLayout>
+
+            <StackLayout Grid.Row="1" VerticalOptions="Center" BackgroundColor="WhiteSmoke" HorizontalOptions="Center">
+                <Label Text="Bank Accounts" HorizontalOptions="Center" FontSize="Medium"/>
+                <BoxView Grid.Row="2" BackgroundColor="White" HeightRequest="1"/>
+                <CollectionView ItemsSource="{Binding BindingContext.AccountsList ,Source={x:Reference thisUser }}">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Horizontal" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="model:UserAccounts5244">
+                            <Grid RowDefinitions="*,auto,auto,auto" ColumnDefinitions="320" HorizontalOptions="Fill" VerticalOptions="Fill">
+
+                                <Frame HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" HeightRequest="100" WidthRequest="200" BackgroundColor="#b3363a">
+                                    <StackLayout >
+                                        <Label>
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Grid.Row="0" Text="{Binding Name}" FontAttributes="Italic" TextColor="White"/>
+                                                    <Span Grid.Row="0" Text="&#10;&#10;" TextColor="White"></Span>
+                                                    <Span Grid.Row="1" Text="{Binding Number}" FontAttributes="Bold" FontSize="Subtitle" TextColor="White"/>
+                                                    <Span Grid.Row="1" Text="&#10;&#10;" TextColor="White"></Span>
+                                                    <Span Grid.Row="2" Text="Balance: $ " TextColor="White"/>
+                                                    <Span Grid.Row="2" Text="{Binding Balance}" FontAttributes="Bold" TextColor="White"/>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+
+
+                                    </StackLayout>
+
+                                </Frame>
+
+                                <StackLayout Grid.Row="0" Grid.RowSpan="3" >
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding BindingContext.cmdAccDetailBtn, Source={x:Reference thisUser}}" 
+                                                    CommandParameter="{Binding .}"/>
+                                    </StackLayout.GestureRecognizers>
+                                </StackLayout>
+
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+
+            </StackLayout>
+
+            <Button Text="➕"
+                    BorderColor="#010C2B"
+                    Grid.Row="3"
+                    BorderWidth=".5"
+                    FontSize="15"
+                    FontAttributes="Bold"
+                    BackgroundColor="Red"
+                    BorderRadius="20"
+                    TextColor="White"
+                    HorizontalOptions="EndAndExpand"
+                    WidthRequest="40"
+                    HeightRequest="40"
+                    Margin="0,0,20,22"
+                    VerticalOptions="EndAndExpand"
+                    Command="{Binding cmdNewAccountBtn}"
+                    CommandParameter="{Binding .}"
+                    />
+
+            <Button Text="👤"
+                    BorderColor="#010C2B"
+                    Grid.Row="2"
+                    BorderWidth=".5"
+                    FontSize="15"
+                    FontAttributes="Bold"
+                    BackgroundColor="Red"
+                    BorderRadius="20"
+                    TextColor="White"
+                    HorizontalOptions="EndAndExpand"
+                    WidthRequest="40"
+                    HeightRequest="40"
+                    Margin="0,0,20,-110"
+                    VerticalOptions="EndAndExpand"
+                    Command="{Binding cmdBtnEditUser}"
+                    CommandParameter="{Binding .}"
+                    />
+
+        </Grid>
     </ContentPage.Content>
 </ContentPage>
